@@ -25,7 +25,7 @@ FMI::Comm::S3::S3(std::map<std::string, std::string> params, std::map<std::strin
     upload_price = std::stod(model_params["upload_price"]);
 
     auto credentialsProvider = Aws::MakeShared<Aws::Auth::EnvironmentAWSCredentialsProvider>(TAG);
-    client = Aws::MakeUnique<Aws::S3::S3Client>(TAG, credentialsProvider, config);
+    client = Aws::MakeUnique<Aws::S3::S3Client>("S3Client", config);
 }
 
 FMI::Comm::S3::~S3() {
@@ -101,4 +101,3 @@ double FMI::Comm::S3::get_price(Utils::peer_num producer, Utils::peer_num consum
     double download_costs = producer * consumer * expected_polls * download_price + producer * consumer * ((double) size_in_bytes / 1000000000.) * transfer_price;
     return upload_costs + download_costs;
 }
-

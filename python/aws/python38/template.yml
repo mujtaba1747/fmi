@@ -5,9 +5,18 @@ Resources:
   python38:
     Type: AWS::Serverless::LayerVersion
     Properties:
-      LayerName: fmi-python38
+      LayerName: fmi-python38-v2
       ContentUri: .
       CompatibleRuntimes:
         - python3.8
+    Metadata:
+      BuildMethod: makefile
+
+  EchoFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      # CodeUri: hello_world/
+      Handler: app.lambda_handler
+      Runtime: python3.8
     Metadata:
       BuildMethod: makefile
